@@ -13,7 +13,7 @@ const Router = () => (
             <Route path="/store/:storeId" component={App} />
             <Route component={NotFound} />
         </Switch>
-    </BrowserRouter>
+    </BrowserRouter> 
 );
 
 export default Router;
