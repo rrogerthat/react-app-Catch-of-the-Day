@@ -6,12 +6,25 @@ import Order from "./Order";
 import Inventory from "./Inventory";
 import sampleFishes from "../sample-fishes";    //can rename it since we're importing default
 import Fish from "./Fish";   
+import base from "../base";
 
 class App extends Component {
     state = {
         fishes: {},
         order: {}
     };  
+
+    componentDidMount() {
+        const {storeId} = this.props.match.params;  //from Router under App
+        this.ref = base.syncState(`${storeId}/fishes`, {    //reference to which store, then to fish obj that db will mirror its state
+            context: this,
+            state: "fishes"
+        }); 
+    }
+
+    componentWillUnmount() {
+        base.removeBinding(this.ref);
+    }
 
     addFish = (fish) => {
         //1. Take copy of existing state (i.e thru object spread)
