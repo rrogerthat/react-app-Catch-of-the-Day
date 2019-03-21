@@ -8,13 +8,14 @@ class Order extends React.Component {
         const count = this.props.order[key];
         const isAvailable = fish && fish.status ===  "available"; 
 
+        if (!fish) return null;   //if null, nothing gets rendered. For a split sec when Order component first loads, list will say 'item not available" since data from localStorage loads first in this component prior to data in Fish component gets loaded from Firebase. Therefore,set to null. Make sure fish state is loaded before we continue.
         if (!isAvailable) {
             return <li key={key}>
                 Sorry {fish ? fish.name: "fish"} is no longer available
             </li>;
         }
         return <li key={key}>
-            {count} lbs {fish.name}
+            {count} lbs {fish.name + " "}
             {formatPrice(count * fish.price)}
         </li>;
     }

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 import React, { Component } from "react";
@@ -11,20 +12,33 @@ import base from "../base";
 class App extends Component {
     state = {
         fishes: {},
-        order: {}
+        order: {}       //persisted in local storage
     };  
 
     componentDidMount() {
         const {storeId} = this.props.match.params;  //from Router under App
+        //first reinstate our localStorage since on refresh it will trigger an update (componentDidUpdate) and empty out what's in order in localStorage
+        const localStorageRef = localStorage.getItem(storeId);  //returns order state for this store
+        if (localStorageRef) {
+            this.setState({ order: JSON.parse(localStorageRef) });   //convert string back to object
+        }
+
         this.ref = base.syncState(`${storeId}/fishes`, {    //reference to which store, then to fish obj that db will mirror its state
             context: this,
             state: "fishes"
         }); 
     }
 
+    componentDidUpdate() {      //after props or state gets updated and component re-renders (not called after initial render)
+        console.log(this.state.order);
+        localStorage.setItem(this.props.match.params.storeId, JSON.stringify(this.state.order));    //this sets the key in key:value under local storage
+    }
+
     componentWillUnmount() {
         base.removeBinding(this.ref);
     }
+
+
 
     addFish = (fish) => {
         //1. Take copy of existing state (i.e thru object spread)
