@@ -30,7 +30,7 @@ class App extends Component {
     }
 
     componentDidUpdate() {      //after props or state gets updated and component re-renders (not called after initial render)
-        console.log(this.state.order);
+        // console.log(this.state.order);
         localStorage.setItem(this.props.match.params.storeId, JSON.stringify(this.state.order));    //this sets the key in key:value under local storage
     }
 
@@ -50,6 +50,17 @@ class App extends Component {
             fishes: fishes  //or just fishes since prop & value are same
         });
     };
+
+    updateFish = (key, updatedFish) => {
+        //1.Take copy of current state
+        const fishes = {...this.state.fishes};
+        //2. Update that state
+        fishes[key] = updatedFish;
+        //3. Set that to state
+        this.setState({
+            fishes
+        });
+    }
 
     loadSampleFishes = () => {
         this.setState({
@@ -78,7 +89,11 @@ class App extends Component {
                     </ul>
                 </div>
                 <Order fishes={this.state.fishes} order={this.state.order} />   {/* can also do {...this.state} but not as modular */}
-                <Inventory addFish={this.addFish} loadSampleFishes={this.loadSampleFishes} />  {/*add prop with same name as property of method- goal is to update state from form*/}
+                <Inventory 
+                    fishes={this.state.fishes} 
+                    addFish={this.addFish} 
+                    updateFish={this.updateFish}
+                    loadSampleFishes={this.loadSampleFishes} />  {/*add prop with same name as property of method- goal is to update state from form*/}
             </div>
         );
     }
