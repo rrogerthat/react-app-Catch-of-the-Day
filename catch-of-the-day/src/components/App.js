@@ -62,6 +62,17 @@ class App extends Component {
         });
     }
 
+    deleteFish = (key) => {
+        //1. take a copy of state
+        const fishes = {...this.state.fishes};
+        //2. update the state
+        fishes[key] = null; //in order to delete from Firebase (can't use delete)
+        //3. update state
+        this.setState({
+            fishes
+        });
+    }
+
     loadSampleFishes = () => {
         this.setState({
             fishes: sampleFishes
@@ -79,6 +90,14 @@ class App extends Component {
         });
     }
 
+    deleteOrder = (key) => {
+        const order = {...this.state.order};
+        delete order[key];
+        this.setState({
+            order
+        });
+    }
+
     render() {
         return (
             <div className="catch-of-the-day">
@@ -88,11 +107,13 @@ class App extends Component {
                         {Object.keys(this.state.fishes).map(key => <Fish key={key} index={key} details={this.state.fishes[key]} addToOrder={this.addToOrder} />)}
                     </ul>
                 </div>
-                <Order fishes={this.state.fishes} order={this.state.order} />   {/* can also do {...this.state} but not as modular */}
+                <Order fishes={this.state.fishes} order={this.state.order} deleteOrder={this.deleteOrder} />   {/* can also do {...this.state} but not as modular */}
                 <Inventory 
                     fishes={this.state.fishes} 
                     addFish={this.addFish} 
                     updateFish={this.updateFish}
+                    deleteFish={this.deleteFish}
+                    deleteOrder={this.deleteOrder}
                     loadSampleFishes={this.loadSampleFishes} />  {/*add prop with same name as property of method- goal is to update state from form*/}
             </div>
         );
