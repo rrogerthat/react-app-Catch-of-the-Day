@@ -2,6 +2,7 @@
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 import React, { Component } from "react";
+import PropTypes from "prop-types"; 
 import Header from "./Header";
 import Order from "./Order";
 import Inventory from "./Inventory";
@@ -9,11 +10,16 @@ import sampleFishes from "../sample-fishes";    //can rename it since we're impo
 import Fish from "./Fish";   
 import base from "../base";
 
+
 class App extends Component {
     state = {
         fishes: {},
         order: {}       //persisted in local storage
     };  
+
+    static propTypes = {
+        match: PropTypes.object
+    }
 
     componentDidMount() {
         const {storeId} = this.props.match.params;  //from Router under App
