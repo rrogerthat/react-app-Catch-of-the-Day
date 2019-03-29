@@ -7,7 +7,6 @@ class EditFishForm extends React.Component {
         //1. take a copy of the current fish
         const updatedFish = {...this.props.fish, [event.currentTarget.name]: event.currentTarget.value};     //similar to: "name: event.currentTarget.value". When property in "prop:value" is a variable, wrap in [].
         this.props.updateFish(this.props.index, updatedFish);
-
     }
 
     render () {
