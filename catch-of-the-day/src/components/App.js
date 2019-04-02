@@ -115,12 +115,14 @@ class App extends Component {
                 </div>
                 <Order fishes={this.state.fishes} order={this.state.order} deleteOrder={this.deleteOrder} />   {/* can also do {...this.state} but not as modular */}
                 <Inventory 
+                    storeId={this.props.match.params.storeId}
                     fishes={this.state.fishes} 
                     addFish={this.addFish} 
                     updateFish={this.updateFish}
                     deleteFish={this.deleteFish}
                     deleteOrder={this.deleteOrder}
                     loadSampleFishes={this.loadSampleFishes} />  {/*add prop with same name as property of method- goal is to update state from form*/}
+                    
             </div>
         );
     }
