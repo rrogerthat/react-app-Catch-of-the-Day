@@ -1,5 +1,21 @@
 ![](http://wes.io/dgAQ/content)
 
+<h1>React Project: Catch of the Day</h1>
+<p>Followed tutorial videos from Wes Bos in building a Full stack React App without Redux. Firebase was used as a hosted database server with the addition of having localStorage in the browser to persist our Food Menu order amount data on browser refresh. Netlify is also used to host our web app.</p>
+
+<a href="https://5cc2aac7f81a0d0a18610314--quizzical-chandrasekhar-4b60dc.netlify.com/" target="_blank">Catch of the Day App Link</a>
+<a href="https://reactforbeginners.com/" target="_blank">Link to Wes Bos' React for Beginners Course</a>
+
+<h2>Technologies used:</h2>
+<ul>
+  <li>HTML/CSS</li>
+  <li>Javascript</li>
+  <li>React</li>
+  <li>Firebase</li>
+  <li>browser's localStorage</li>
+  <li>Netlify</li>
+</ul>
+
 # React For Beginners — [ReactForBeginners.com](https://ReactForBeginners.com)
 
 Starter files for the React For Beginners course. Come <a href="https://ReactForBeginners.com/">Learn React</a> with me!
